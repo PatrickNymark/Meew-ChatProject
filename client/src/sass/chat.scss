@@ -1,0 +1,87 @@
+.chat-content-wrapper {
+    display: flex;
+    height: calc(100vh - 50px);
+
+    .chat-sidebar {
+        flex-basis: 30%;
+        background: #154636;
+        text-align: center;
+        color: #fff;
+        padding: 30px 10px;
+
+        .title {
+            margin: 0px;
+        }
+
+        .subtitle {
+            margin: 5px;
+        }
+
+        .users-list {
+            padding-top: 50px;
+
+            .user {
+                min-height: 30px;
+                border: 1px solid #eee;
+                position: relative;
+                cursor: pointer;
+
+                .status-circle {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background-color: grey;
+                    border: 1px solid #d6d6d6;
+                    bottom: 5px;
+                    right: 5px;
+                    position: absolute;
+                }
+                
+                .status-star {
+                    position: absolute;
+                    left: 5px;
+                    bottom: 2px;
+                    font-size: 12px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    
+    .chat-content {
+        flex-basis: 70%;
+        text-align: center;
+        padding: 20px 100px;
+
+        .chat-window-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+    
+            .chat-window {
+                height: 700px;
+                width: 100%;
+                border: 1px solid #eee;
+                overflow-y: auto;
+                position: relative;
+
+                .message-input {
+                    position: absolute;
+                    bottom: 5px;
+                    width: 70%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    min-height: 30px;
+                    border-radius: 25px;
+                    border: 1px solid #eee;
+                    padding-left: 20px;
+                    font-family: 'Montserrat';
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+        }
+    }
+}
