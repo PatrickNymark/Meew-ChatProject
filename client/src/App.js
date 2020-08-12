@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
 import { setAuthToken } from './helpers/auth-header';
 
 import decode from 'jwt-decode';
@@ -20,15 +20,16 @@ function App() {
 
 		if(token) {
 			const decoded = decode(token)
-			// setAuthToken(token)
-			if(Date.now() >= decoded.exp * 1000) {
-				window.location = '/login'
-			} else {
+      
+			if(Date.now() <= decoded.exp * 1000) {
 				setAuthToken(token)
 				setAuthenticated(true)
+			} else {
+				window.localStorage.removeItem('token')
+				window.location = '/'
 			}
 		}
-	})
+	}, [])
 
 	return (
 		<Router className="App">

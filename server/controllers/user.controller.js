@@ -2,12 +2,11 @@ const express = require('express');
 const router = express.Router()
 const userService = require('../services/user.service');
 
+router.get('/', getAllUsers)
 
-router.get('/', getUsers)
-
-function getUsers(req, res, next) {
+function getAllUsers(req, res, next) {
     userService.all()
-        .then(user => res.json(user))
+        .then(users => res.json(users))
         .catch(err => next(err))
 }
 

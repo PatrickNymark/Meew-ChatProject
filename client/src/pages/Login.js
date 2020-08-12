@@ -13,13 +13,12 @@ export default function Login(props) {
         e.preventDefault()
 
         axios.post('/api/auth/login', { username, password }).then(res => {
-            console.log(res.data)
-            if(res.status === 200) {
-                localStorage.setItem('token', res.data.jwtToken)
-                setAuthToken(res.data.jwtToken)
-                props.setAuthenticated(true)
-                props.history.push('/chat')
-            }
+            const { jwtToken } = res.data;
+            localStorage.setItem('token', jwtToken)
+            setAuthToken(jwtToken)
+
+            props.setAuthenticated(true)
+            props.history.push('/chat')
         })
     }
 

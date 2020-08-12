@@ -9,10 +9,8 @@ export default function Chat(props) {
     useEffect(() => {
         axios.get('/api/auth/current').then(res => {
             setUser(res.data)
-        }).catch(err => {
-            props.history.push('/login')
         })
-    })
+    }, [])
 
     const handleInputChange = (e) => {
         setMessage(e.target.value)
