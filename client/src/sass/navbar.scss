@@ -1,0 +1,21 @@
+@import 'base.scss';
+
+.navbar-wrapper {
+    height: 50px;
+    background: #15805e;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0px 50px;
+    color: #fff;
+
+    .navbar {
+        list-style: none;
+
+        .item  {
+            display: inline;
+            padding: 0px 10px;
+            cursor: pointer;
+        }
+    }
+}
