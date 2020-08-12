@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 // pages
@@ -10,6 +10,14 @@ import Register from './pages/Register';
 import Navbar from './components/navbar';
 
 function App() {
+
+  useEffect(() => {
+    console.log('loadedd')
+    const token = window.localStorage.getItem('token')
+    console.log(token)
+
+  })
+
   return (
     <Router className="App">
         <Navbar />
