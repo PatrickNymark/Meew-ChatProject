@@ -15,7 +15,8 @@ mongoose.connect('mongodb://localhost:27017/meew-chat', {
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 
-app.use('/api/auth', require('./controllers/auth.controller'))
+app.use('/api/auth', require('./controllers/auth.controller'));
+app.use('/api/users', require('./controllers/user.controller'));
 
 const port = process.env.PORT || 5000;
 
