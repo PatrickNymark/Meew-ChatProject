@@ -46,6 +46,16 @@
                 }
             }
         }
+
+        .logged-in-user {
+            position: absolute;
+            bottom: 5px;
+            font-size: 12px;
+
+            span {
+                padding-left: 10px;
+            }
+        }
     }
     
     .chat-content {

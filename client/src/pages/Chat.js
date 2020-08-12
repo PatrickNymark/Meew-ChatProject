@@ -1,9 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 import '../sass/chat.scss';
 
-export default function Chat() {
+export default function Chat(props) {
     const [messageValue, setMessage] = useState("")
+    const [user, setUser] = useState("")
 
+    useEffect(() => {
+        axios.get('/api/auth/current').then(res => {
+            setUser(res.data)
+        }).catch(err => {
+            props.history.push('/login')
+        })
+    })
 
     const handleInputChange = (e) => {
         setMessage(e.target.value)
@@ -21,7 +30,6 @@ export default function Chat() {
                 <div className="chat-sidebar">
                     <h1 className="title">Chat App</h1>
                     <p className="subtitle">By Meew Interns</p>
-
                     <div className="users-list">
                         <div className="user">
                             <p>Patrick Nymark</p>
@@ -30,6 +38,7 @@ export default function Chat() {
                             <div className="status-circle"></div>
                         </div>
                     </div>
+                    <p className="logged-in-user">Logged in: <span>{user.username}</span></p>
                 </div>
                 <div className="chat-content">
                     <h1>Content</h1>

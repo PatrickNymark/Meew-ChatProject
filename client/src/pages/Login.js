@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { setAuthToken } from '../helpers/auth-header';
 import axios from 'axios';
 
 import '../sass/login.scss'
@@ -14,7 +15,9 @@ export default function Login(props) {
         axios.post('/api/auth/login', { username, password }).then(res => {
             console.log(res.data)
             if(res.status === 200) {
-                window.localStorage.setItem('token', res.data.jwtToken)
+                localStorage.setItem('token', res.data.jwtToken)
+                setAuthToken(res.data.jwtToken)
+                props.setAuthenticated(true)
                 props.history.push('/chat')
             }
         })

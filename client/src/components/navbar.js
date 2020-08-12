@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import '../sass/navbar.scss'
 
 export default function Navbar({ isAuthenticated }) {
+    console.log(isAuthenticated)
     return (
         <div className="navbar-wrapper">
             <ul className="navbar">
