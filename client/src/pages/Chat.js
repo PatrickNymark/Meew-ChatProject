@@ -1,9 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 import '../sass/chat.scss';
 
 export default function Chat() {
     const [messageValue, setMessage] = useState("")
-
+    const [users, setUsers] = useState([])
+    useEffect(() => {
+        axios.get('/api/users').then(res => {
+            console.log(res.data)
+        })
+    }, [])
 
     const handleInputChange = (e) => {
         setMessage(e.target.value)
