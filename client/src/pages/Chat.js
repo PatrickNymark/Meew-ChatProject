@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../sass/chat.scss';
 
 export default function Chat() {
+    const [messageValue, setMessage] = useState("")
+
+
+    const handleInputChange = (e) => {
+        setMessage(e.target.value)
+    }
+
+    const handleSubmit = (e) => {
+        if(e.key === 'Enter'){
+            setMessage("")
+        }
+    }
+
     return (
         <div>
             <div className="chat-content-wrapper">
@@ -22,9 +35,9 @@ export default function Chat() {
                     <h1>Content</h1>
                     <div className="chat-window-wrapper">
                         <div className="chat-window">
-
+                            <p>{messageValue}</p>
                 
-                            <input className="message-input" placeholder="Write a message..." />
+                            <input value={messageValue} onKeyDown={handleSubmit} onChange={handleInputChange} className="message-input" placeholder="Write a message..." />
                         </div>
                     </div>
                 </div>
