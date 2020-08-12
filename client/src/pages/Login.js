@@ -14,7 +14,7 @@ export default function Login() {
                     <input className="input" type="text" placeholder="Email address" name="email" />
                     <input className="input" type="text" placeholder="Password" name="password" />
                     <button className="login-btn">Log In</button>
-                    <p>Not Registered? <Link  className ="click-here" to="/register">Click Here</Link></p>
+                    <p>Not Registered? <Link className="click-here" to="/register">Click Here</Link></p>
                 </div>
             </div>
         </div>
