@@ -1,0 +1,41 @@
+.login-wrapper{
+    height: calc(100vh - 50px);
+    display: flex;
+    align-items: center;
+
+    .login-container {
+        margin: auto;
+        height:300px;
+        width: 500px;
+        border: 3px solid #15805e;
+        position: relative;
+
+        .email {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: block;
+
+            .login-btn{
+                margin-top: 10px;
+                min-width: 210px;
+                background: #15805e;
+                border: none;
+                padding: 5px;
+                color: #fff;
+            }
+
+            .input{
+                min-width: 200px;
+                margin: 5px 0px;
+                border: 1px solid #eee;
+                padding: 8px 5px;
+            }
+
+            .click-here{
+                color: #15805e;
+            }
+        }
+    }
+}
