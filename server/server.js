@@ -5,8 +5,8 @@ const bodyParser = require('body-parser')
 
 require('dotenv').config();
 
-mongoose.connect('mongodb://localhost:27017/meew-chat', { 
-    useNewUrlParser: true, 
+mongoose.connect('mongodb+srv://User:Meew12345@meew.fdz6p.mongodb.net/test', {
+    useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
 }).then(() => console.log('db connected'));
@@ -18,7 +18,7 @@ app.use(bodyParser.json())
 app.use('/api/auth', require('./controllers/auth.controller'));
 app.use('/api/users', require('./controllers/user.controller'));
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
 app.use(require('./helpers/error-handler'))
 
