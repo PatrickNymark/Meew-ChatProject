@@ -33,7 +33,7 @@ function App() {
 
 	return (
 		<Router className="App">
-			<Navbar isAuthenticated={isAuthenticated} />
+			<Navbar setAuthenticated={setAuthenticated} isAuthenticated={isAuthenticated} />
 			<Route exact path="/login" render={(props) => (
 				<Login {...props} setAuthenticated={setAuthenticated} />
 			)} />
