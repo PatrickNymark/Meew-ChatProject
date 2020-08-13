@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const MessageSchema = new Schema({
+const RoomSchema = new Schema({
     participants: {
         type: [{
             type: Schema.Types.ObjectId,
@@ -11,12 +11,12 @@ const MessageSchema = new Schema({
     },
     roomId: {
         type: String,
-        required: true
+        // required: true
     }
 }, { timestamps: true });
 
 function participantsLimit(val) {
     return val.length == 2;
-  }
+}
 
-module.exports = Message = mongoose.model("messages", MessageSchema);
+module.exports = Room = mongoose.model("rooms", RoomSchema);

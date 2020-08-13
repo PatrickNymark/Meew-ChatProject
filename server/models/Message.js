@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const MessageSchema = new Schema({
     roomId: {
         type: Schema.Types.ObjectId,
+        ref: 'rooms',
         required: true
     },
     message: {
@@ -12,6 +13,7 @@ const MessageSchema = new Schema({
     },
     owner: {
         type: Schema.Types.ObjectId,
+        ref: 'user',
         required: true
     },
 }, { timestamps: true });

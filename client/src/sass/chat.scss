@@ -25,6 +25,7 @@
                 border: 1px solid #eee;
                 position: relative;
                 cursor: pointer;
+                margin: 10px 0px;
 
                 .status-circle {
                     width: 10px;
@@ -74,21 +75,61 @@
                 border: 1px solid #eee;
                 overflow-y: auto;
                 position: relative;
+                padding: 0px 30px;
 
                 .message-input {
-                    position: absolute;
+                    position: sticky;
                     bottom: 5px;
                     width: 70%;
-                    left: 50%;
-                    transform: translateX(-50%);
                     min-height: 30px;
                     border-radius: 25px;
                     border: 1px solid #eee;
                     padding-left: 20px;
                     font-family: 'Montserrat';
 
+                    &.t0 {
+                        position: absolute;
+                        left: 50%;
+                        width: 70%;
+                        transform: translateX(-50%);
+                    }
+
                     &:focus {
                         outline: none;
+                    }
+                }
+
+                .message-wrapper {
+                    display: grid;
+
+                    .message-content {
+                        position: relative;
+                        min-height: 50px;
+                        // background: #eee;
+                        margin: 10px 0px;
+                        clear: both;
+                        justify-self: flex-start;
+                        line-height: 30px;
+
+                        &.true {
+                            color: #285bb9;
+                            justify-self: flex-end;
+                        }
+
+                        .message {
+                            background: #eee;
+                            border-radius: 25px;
+                            padding: 0px 20px;
+                            min-height: 30px;
+                            
+
+                            &.true {
+                                color: #ffff;
+                                background: #285bb9;
+                                border-radius: 25px;
+                                padding: 0px 20px;
+                            }
+                        }
                     }
                 }
             }
