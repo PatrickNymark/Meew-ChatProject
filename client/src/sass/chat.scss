@@ -55,6 +55,7 @@
 
             span {
                 padding-left: 10px;
+                font-size: 18px;
             }
         }
     }
@@ -63,6 +64,17 @@
         flex-basis: 70%;
         text-align: center;
         padding: 20px 100px;
+
+        .chat-user {
+            font-size: 25px;
+            font-weight: lighter;
+            text-align: left;
+
+            span {
+                font-size: 12px;
+                padding-right: 10px;
+            }
+        }
 
         .chat-window-wrapper {
             display: flex;
@@ -87,7 +99,7 @@
                     padding-left: 20px;
                     font-family: 'Montserrat';
 
-                    &.t0 {
+                    &.true {
                         position: absolute;
                         left: 50%;
                         width: 70%;
@@ -128,6 +140,25 @@
                                 background: #285bb9;
                                 border-radius: 25px;
                                 padding: 0px 20px;
+                            }
+                        }
+
+                        .message-time {
+                            font-size: 10px;
+                            text-align: right;
+                            padding-right: 10px;
+                            margin: 0px;
+                            transform: translateY(-12px);
+
+                            &.false {
+                                padding-right: 0px;
+                                padding-left: 10px;
+                                text-align: left;
+                            }
+
+                            span {
+                                font-size: 12px;
+                                padding-left: 5px;
                             }
                         }
                     }

@@ -32,7 +32,7 @@ app.use(require('./helpers/error-handler'))
 
 const Room = require('./models/Room');
 const Message = require('./models/Message');
-
+const User = require('./models/User')
 
 io.on('connection', socket => {
     console.log('Server: Connected')
@@ -41,6 +41,8 @@ io.on('connection', socket => {
         // const roomId = userId + loggedUser;
         const foundRoom = await Room.find({ participants: { $eq: [userId, loggedUser]}});
         const foundRoom2 = await Room.find({ participants: { $eq: [loggedUser, userId]}});
+        const chatUser = await User.findById(userId);
+
         console.log(foundRoom.length)
         console.log(foundRoom2.length)
 
@@ -55,7 +57,7 @@ io.on('connection', socket => {
             }
 
             socket.join(roomId);
-            socket.emit('room', roomId)
+            socket.emit('room', { roomId, chatUser })
 
             const messages = await Message.find().where({ roomId }).populate('owner')
             io.sockets.in(roomId).emit('messages', messages)
@@ -67,9 +69,11 @@ io.on('connection', socket => {
             const newRoom = new Room({ participants });
             await newRoom.save();
 
-            socket.join(newRoom._id);
+            const roomId = newRoom._id;
+
+            socket.join(roomId);
             
-            socket.emit('room', newRoom._id);
+            socket.emit('room', { roomId, chatUser });
         }
     });
 

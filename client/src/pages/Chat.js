@@ -3,6 +3,8 @@ import axios from 'axios';
 import '../sass/chat.scss';
 import io from 'socket.io-client';
 import $ from 'jquery'
+import moment from 'moment'
+
 const socket = io('http://localhost:5000');
 // let room = '';
 
@@ -15,11 +17,19 @@ class Chat extends Component {
             currentUser: {},
             users: [],
             messages: [],
-            room: ''
+            room: '',
+            showChat: false,
+            chatUser: {},
+            typing: false
         }
     }
 
     async componentDidMount() {
+        console.log('is: ' + this.props.isAuthenticated)
+        if(!this.props.isAuthenticated) {
+            this.props.history.push('/login')
+        }
+
         const users = await axios.get('/api/users');
         const user = await axios.get('/api/auth/current')
 
@@ -28,9 +38,10 @@ class Chat extends Component {
             currentUser: user.data
         })
 
-        socket.on('room', (roomId) => {
+        socket.on('room', ({ roomId, chatUser }) => {
             this.setState({
                 room: roomId,
+                chatUser,
                 messages: []
             }) 
         })
@@ -51,13 +62,15 @@ class Chat extends Component {
 
     componentDidUpdate() {
         console.log('called')
-        $("#chat").scrollTop($("#chat")[0].scrollHeight);
-
+        if(this.state.showChat) {
+            $("#chat").scrollTop($("#chat")[0].scrollHeight);
+        }
     }
 
     handleInputChange = (e) => {
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            typing: e.target.value.length > 0
         })
     }
 
@@ -74,12 +87,20 @@ class Chat extends Component {
 
     handleUserClick = (e, userId) => {
         const { currentUser } = this.state;
-
+        this.setState({ showChat: true })
         socket.emit('open-room', { userId, loggedUser: currentUser._id });
     }
 
+    bottomInput = () => {
+        if(this.state.messages.length <= 6) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     render() {
-        const { currentUser, users, message, messages } = this.state;
+        const { currentUser, users, message, messages, showChat, chatUser } = this.state;
 
         return (
             <div>
@@ -105,22 +126,30 @@ class Chat extends Component {
                         <p className="logged-in-user">Logged in: <span>{currentUser.username}</span></p>
                     </div>
                     <div className="chat-content">
-                        <div className="chat-window-wrapper">
-                            <div id="chat" className="chat-window">
-                                {this.state.messages.map(message => {
-                                    const isOwner = message.owner.username === currentUser.username
-                                    return (
-                                        <div key={message._id} className="message-wrapper">
-                                            <div className={'message-content ' + isOwner} key={message._id}>
-                                                <p className={'message ' + isOwner}>{message.message}</p>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                    
-                                <input value={message} onKeyDown={this.handleSubmit} onChange={this.handleInputChange} name="message" className={"message-input t" + messages.length} placeholder="Write a message..." />
+                        {!showChat && <p>Choose a user in the sidebar to start or continue a private chat.</p>}
+                        {showChat && 
+                        <div>
+                            <div>
+                                <h1 className="chat-user"><span>Chatting with: </span>{chatUser.username}</h1>
                             </div>
-                        </div>
+                            <div className="chat-window-wrapper">
+                                <div id="chat" className="chat-window">
+                                    {this.state.messages.map(message => {
+                                        const isOwner = message.owner.username === currentUser.username
+                                        return (
+                                            <div key={message._id} className="message-wrapper">
+                                                <div className={'message-content ' + isOwner} key={message._id}>
+                                                    <p className={'message ' + isOwner}>{message.message}</p>
+                                                    <p className={'message-time ' + isOwner}>{moment(message.createdAt).format('DD/MM')} <span>{moment(message.createdAt).format('H:mm')} </span></p>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                        
+                                    <input value={message} onKeyDown={this.handleSubmit} onChange={this.handleInputChange} name="message" className={"message-input " + this.bottomInput()} placeholder="Write a message..." />
+                                </div>
+                            </div>
+                        </div>}
                     </div>
                 </div>
             </div>

@@ -37,8 +37,10 @@ function App() {
 			<Route exact path="/login" render={(props) => (
 				<Login {...props} setAuthenticated={setAuthenticated} />
 			)} />
+			<Route exact path="/chat" render={(props) => (
+				<Chat {...props} isAuthenticated={isAuthenticated} />
+			)} />
 			<Route exact path="/register" component={Register} />
-			<Route exact path="/chat" component={Chat} />
 		</Router>
 	);
 }
