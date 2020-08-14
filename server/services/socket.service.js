@@ -1,6 +1,6 @@
-const Room = require('./models/Room');
-const Message = require('./models/Message');
-const User = require('./models/User')
+const Room = require('../models/Room');
+const Message = require('../models/Message');
+const User = require('../models/User')
 
 module.exports = function(io) {
     io.on('connection', socket => {
