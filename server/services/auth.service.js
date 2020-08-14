@@ -18,7 +18,7 @@ async function login(userData) {
     const user = await User.findOne({ username: userData.username })
 
     if(!user) {
-        throw `User '${userData.email}' not found`
+        throw `User '${userData.username}' not found`
     }
 
     if(user && bcrypt.compareSync(userData.password, user.password)) {
@@ -40,7 +40,7 @@ async function login(userData) {
  * @returns a Promise or exception  
  */
 async function register(userData) {
-    if(await User.findOne({ email: userData.username })) {
+    if(await User.findOne({ username: userData.username })) {
         throw `User '${userData.username}' already exists`
     }
 
