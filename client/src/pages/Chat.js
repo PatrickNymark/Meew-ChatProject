@@ -65,6 +65,10 @@ class Chat extends Component {
         if(this.state.showChat) {
             $("#chat").scrollTop($("#chat")[0].scrollHeight);
         }
+
+        if(!this.props.isAuthenticated) {
+            this.props.history.push('/login')
+        }
     }
 
     handleInputChange = (e) => {
