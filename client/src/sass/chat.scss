@@ -88,7 +88,8 @@
                 overflow-y: auto;
                 position: relative;
                 padding: 0px 30px;
-
+                box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+                
                 .message-input {
                     position: sticky;
                     bottom: 5px;
