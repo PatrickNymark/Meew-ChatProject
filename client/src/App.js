@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
 import { setAuthToken } from './helpers/auth-header';
-
+import axios from 'axios';
 import decode from 'jwt-decode';
 
 // pages
@@ -31,6 +31,15 @@ function App() {
 		}
 	}, [])
 
+	const deleteAccount = (id) => {
+        axios.post('/api/users', { id }).then(res => {
+			setAuthenticated(false)
+			setAuthToken({})
+			localStorage.removeItem('token')
+            window.location = '/login'
+        })
+    }
+
 	return (
 		<Router className="App">
 			<Navbar isAuthenticated={isAuthenticated} />
@@ -38,7 +47,7 @@ function App() {
 				<Login {...props} setAuthenticated={setAuthenticated} />
 			)} />
 			<Route exact path="/chat" render={(props) => (
-				<Chat {...props} isAuthenticated={isAuthenticated} />
+				<Chat {...props} deleteAccount={deleteAccount} isAuthenticated={isAuthenticated} />
 			)} />
 			<Route exact path="/register" component={Register} />
 		</Router>
