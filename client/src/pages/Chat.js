@@ -21,7 +21,8 @@ class Chat extends Component {
             showChat: false,
             chatUser: {},
             typing: false,
-            showModal: false
+            showModal: false,
+            userTyping: ''
         }
     }
 
@@ -59,6 +60,13 @@ class Chat extends Component {
                 messages: messages
             })
         })    
+
+        socket.on('isTyping', (username) => {
+            console.log(username)
+            this.setState({
+                userTyping: username
+            })
+        })
     }
 
     componentDidUpdate() {
@@ -77,6 +85,14 @@ class Chat extends Component {
             [e.target.name]: e.target.value,
             typing: e.target.value.length > 0
         })
+
+        if(e.target.value.length > 0) {
+            const { currentUser, room } = this.state;
+            const { username } = currentUser
+            socket.emit('typing', { username, room })
+        } else {
+            socket.emit('stoppedTyping', this.state.room)
+        }
     }
 
     handleSubmit = (e) => {
@@ -163,6 +179,7 @@ class Chat extends Component {
                                     <input value={message} onKeyDown={this.handleSubmit} onChange={this.handleInputChange} name="message" className={"message-input " + this.bottomInput()} placeholder="Write a message..." />
                                 </div>
                             </div>
+                            {this.state.userTyping && this.state.userTyping !== this.state.currentUser.username &&  <p className="typing">{this.state.userTyping} is typing...</p>}
                         </div>}
                     </div>
                 </div>

@@ -52,6 +52,14 @@ module.exports = function(io) {
 
             io.sockets.in(room).emit('message', savedMessage)
         })
+
+        socket.on('typing', ({ username, room }) => {
+            io.sockets.in(room).emit('isTyping', username)
+        })
+
+        socket.on('stoppedTyping', (room) => {
+            io.sockets.in(room).emit('isTyping')
+        })
     })
 }
  

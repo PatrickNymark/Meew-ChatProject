@@ -78,12 +78,12 @@
         padding: 20px 100px;
 
         .chat-user {
-            font-size: 25px;
+            font-size: 27px;
             font-weight: lighter;
             text-align: left;
 
             span {
-                font-size: 12px;
+                font-size: 14px;
                 padding-right: 10px;
             }
         }
@@ -179,6 +179,11 @@
             }
         }
     }
+}
+
+.typing {
+    font-size: 12px;
+    text-align: left;
 }
 
 
