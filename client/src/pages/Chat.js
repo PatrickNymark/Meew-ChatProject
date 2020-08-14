@@ -103,6 +103,11 @@ class Chat extends Component {
         }
     }
 
+    deleteAccount = () => {
+        const id = this.state.currentUser._id;
+        this.props.deleteAccount(id)
+    }
+
     render() {
         const { currentUser, users, message, messages, showChat, chatUser } = this.state;
 
@@ -127,7 +132,10 @@ class Chat extends Component {
                             })}
                             
                         </div>
-                        <p className="logged-in-user">Logged in: <span>{currentUser.username}</span></p>
+                        <div className="logged-in-user">
+                            <button onClick={this.deleteAccount} className="delete-btn">Delete</button>
+                            <p>Logged in: <span>{currentUser.username}</span></p>
+                        </div>
                     </div>
                     <div className="chat-content">
                         {!showChat && <p>Choose a user in the sidebar to start or continue a private chat.</p>}
