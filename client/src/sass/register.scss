@@ -7,26 +7,42 @@
         margin: auto;
         height:300px;
         width: 500px;
-        border: 3px solid #15805e;
         position: relative;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
         .register{
             position: absolute;
             top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
-            margin: block;
+            overflow: hidden;
+
+            .error-message {
+                font-size: 12px;
+                text-align: center;
+                background: #bd3434;
+                padding: 5px 0px;
+                color: #fff;
+            }
+
+            .register-header {
+                font-weight: 400;
+                font-size: 26px;
+                color: #383838;
+                text-align: center;
+            }
 
             .register-btn{
                 margin-top: 10px;
-                min-width: 210px;
                 background: #15805e;
                 border: none;
                 padding: 5px;
                 color: #fff;
+                display: block;
+                width: 100%;
             }
                .input{
-                min-width: 200px;
+                width: 95%;
                 margin: 5px 0px;
                 border: 1px solid #eee;
                 padding: 8px 5px;

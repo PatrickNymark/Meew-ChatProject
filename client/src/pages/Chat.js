@@ -20,7 +20,8 @@ class Chat extends Component {
             room: '',
             showChat: false,
             chatUser: {},
-            typing: false
+            typing: false,
+            showModal: false
         }
     }
 
@@ -104,8 +105,9 @@ class Chat extends Component {
     }
 
     deleteAccount = () => {
-        const id = this.state.currentUser._id;
-        this.props.deleteAccount(id)
+        this.setState({
+            showModal: true
+        })
     }
 
     render() {
@@ -133,7 +135,7 @@ class Chat extends Component {
                             
                         </div>
                         <div className="logged-in-user">
-                            <button onClick={this.deleteAccount} className="delete-btn">Delete</button>
+                            <button onClick={this.deleteAccount} className="delete-btn">Delete Account</button>
                             <p>Logged in: <span>{currentUser.username}</span></p>
                         </div>
                     </div>
@@ -164,6 +166,19 @@ class Chat extends Component {
                         </div>}
                     </div>
                 </div>
+
+                {this.state.showModal &&<div className="delete-modal">
+                    
+                    <div className="overlay"></div>
+                    <div className="modal-content">
+                        <p>Are you sure, you want to delete your account?</p>
+                        <div className="buttons">
+                            <button onClick={() => this.props.deleteAccount(currentUser._id)} className="yes">Yes</button>
+                            <button onClick={() => this.setState({ showModal: false})}>Cancel</button>
+                        </div>
+   
+                    </div>
+                </div>}
             </div>
         )
     }
